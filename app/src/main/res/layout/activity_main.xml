@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@android:style/Theme.Black.NoTitleBar"
-    tools:context="com.example.daniel.myapplication.MainActivity">
+    tools:context="com.danielsundberg.yarr.MainActivity">
 
     <WebView
         android:id="@+id/activity_main_webview"

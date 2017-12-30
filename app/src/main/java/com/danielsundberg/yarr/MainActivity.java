@@ -1,7 +1,6 @@
-package com.example.daniel.myapplication;
+package com.danielsundberg.yarr;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.webkit.WebSettings;
@@ -29,5 +28,15 @@ public class MainActivity extends Activity {
         webSettings.setAllowUniversalAccessFromFileURLs(true);
 
         mWebView.loadUrl("file:///android_asset/www/index.html");
+    }
+
+    // Prevent the back-button from closing the app
+    @Override
+    public void onBackPressed() {
+        if(mWebView.canGoBack()) {
+            mWebView.goBack();
+        } else {
+            super.onBackPressed();
+        }
     }
 }
