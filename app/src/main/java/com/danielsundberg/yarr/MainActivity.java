@@ -27,6 +27,8 @@ public class MainActivity extends Activity {
         webSettings.setDomStorageEnabled(true);
         webSettings.setAllowUniversalAccessFromFileURLs(true);
 
+        mWebView.addJavascriptInterface(new YARRWebAppInterface(this), "YARRAndroid");
+
         mWebView.loadUrl("file:///android_asset/www/index.html");
     }
 
