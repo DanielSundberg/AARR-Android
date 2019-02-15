@@ -25,5 +25,6 @@ public class YARRWebAppInterface {
         share.putExtra(Intent.EXTRA_SUBJECT, title);
         share.putExtra(Intent.EXTRA_TEXT, url);
 
-        mContext.startActivity(Intent.createChooser(share, "Share blog post!"));    }
+        mContext.startActivity(Intent.createChooser(share, "Share blog post!"));
+    }
 }

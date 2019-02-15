@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Window;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 public class MainActivity extends Activity {
 
@@ -28,6 +29,7 @@ public class MainActivity extends Activity {
         webSettings.setAllowUniversalAccessFromFileURLs(true);
 
         mWebView.addJavascriptInterface(new YARRWebAppInterface(this), "YARRAndroid");
+        mWebView.setWebViewClient(new YARRWebViewClient());
 
         mWebView.loadUrl("file:///android_asset/www/index.html");
     }
@@ -41,4 +43,5 @@ public class MainActivity extends Activity {
             super.onBackPressed();
         }
     }
+
 }
