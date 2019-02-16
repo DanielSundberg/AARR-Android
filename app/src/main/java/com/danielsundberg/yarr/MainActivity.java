@@ -1,6 +1,8 @@
 package com.danielsundberg.yarr;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Window;
 import android.webkit.WebSettings;
@@ -44,4 +46,19 @@ public class MainActivity extends Activity {
         }
     }
 
+    private class YARRWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            //boolean hasGesture = request.hasGesture();
+            //String url = request.getUrl().toString();
+            if(!url.startsWith("http://") && !url.startsWith("https://")){
+                // For urls that start with file:// we do nothing
+                return true;
+            } else {
+                Intent intent = new Intent(Intent.ACTION_DEFAULT, Uri.parse(url));
+                startActivity(intent);
+                return true;
+            }
+        }
+    }
 }
