@@ -31,16 +31,20 @@ public class YARRWebAppInterface {
         mContext.startActivity(Intent.createChooser(share, "Share blog post!"));
     }
 
-    public void StartSession() {
-
-        String jsCommand = String.format("javascript:window.ContainerAppCallbacks.startSession(\"%s\", \"%s\")",
+    public void initCallbacks() {
+        String jsCommand = String.format("javascript:window.ContainerAppCallbacks.init(\"%s\", \"%s\")",
                 BuildConfig.aarrstat_api_url, BuildConfig.aarrstat_api_key);
         mWebView.loadUrl(jsCommand);
     }
 
-    public void EndSession() {
-        String jsCommand = String.format("javascript:window.ContainerAppCallbacks.endSession(\"%s\", \"%s\")",
-                BuildConfig.aarrstat_api_url, BuildConfig.aarrstat_api_key);
+    public void onResume() {
+
+        String jsCommand = String.format("javascript:window.ContainerAppCallbacks.onResume()");
+        mWebView.loadUrl(jsCommand);
+    }
+
+    public void onPause() {
+        String jsCommand = String.format("javascript:window.ContainerAppCallbacks.onPause()");
         mWebView.loadUrl(jsCommand);
     }
 }

@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
     protected void onResume() {
         System.out.println("onResume");
         if (mJSAppLoaded) {
-            mYarrWebAppInterface.StartSession();
+            mYarrWebAppInterface.onResume();
         }
         super.onResume();
     }
@@ -65,7 +65,7 @@ public class MainActivity extends Activity {
     protected void onPause() {
         System.out.println("onPause");
         if (mJSAppLoaded) {
-            mYarrWebAppInterface.EndSession();
+            mYarrWebAppInterface.onPause();
         }
         super.onPause();
     }
@@ -96,7 +96,8 @@ public class MainActivity extends Activity {
         public void onPageFinished(WebView webView, String url) {
             super.onPageFinished(webView, url);
             mJSAppLoaded = true;
-            mYarrWebAppInterface.StartSession();
+            mYarrWebAppInterface.initCallbacks();
+            mYarrWebAppInterface.onResume();
         }
     }
 }
