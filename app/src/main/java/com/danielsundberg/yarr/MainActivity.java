@@ -12,6 +12,8 @@ import android.webkit.WebViewClient;
 public class MainActivity extends Activity {
 
     private WebView mWebView;
+    private YARRWebAppInterface mYarrWebAppInterface;
+    private boolean mJSAppLoaded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +32,8 @@ public class MainActivity extends Activity {
         webSettings.setDomStorageEnabled(true);
         webSettings.setAllowUniversalAccessFromFileURLs(true);
 
-        mWebView.addJavascriptInterface(new YARRWebAppInterface(this, mWebView), "YARRAndroid");
-
-        String aarrstatApiKey = BuildConfig.aarrstat_api_key;
+        mYarrWebAppInterface = new YARRWebAppInterface(this, mWebView);
+        mWebView.addJavascriptInterface(mYarrWebAppInterface, "YARRAndroid");
 
         mWebView.setWebViewClient(new YARRWebViewClient());
 
@@ -49,16 +50,31 @@ public class MainActivity extends Activity {
         }
     }
 
+
+
     @Override
     protected void onResume() {
         System.out.println("onResume");
+        if (mJSAppLoaded) {
+            mYarrWebAppInterface.StartSession();
+        }
         super.onResume();
     }
 
     @Override
     protected void onPause() {
         System.out.println("onPause");
+        if (mJSAppLoaded) {
+            mYarrWebAppInterface.EndSession();
+        }
         super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        System.out.println("onDestroy");
+        mJSAppLoaded = false;
+        super.onDestroy();
     }
 
     private class YARRWebViewClient extends WebViewClient {
@@ -74,6 +90,13 @@ public class MainActivity extends Activity {
                 startActivity(intent);
                 return true;
             }
+        }
+
+        @Override
+        public void onPageFinished(WebView webView, String url) {
+            super.onPageFinished(webView, url);
+            mJSAppLoaded = true;
+            mYarrWebAppInterface.StartSession();
         }
     }
 }

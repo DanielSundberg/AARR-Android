@@ -32,6 +32,15 @@ public class YARRWebAppInterface {
     }
 
     public void StartSession() {
-        //mWebView.loadUrl("javascript:increment()");
+
+        String jsCommand = String.format("javascript:window.ContainerAppCallbacks.startSession(\"%s\", \"%s\")",
+                BuildConfig.aarrstat_api_url, BuildConfig.aarrstat_api_key);
+        mWebView.loadUrl(jsCommand);
+    }
+
+    public void EndSession() {
+        String jsCommand = String.format("javascript:window.ContainerAppCallbacks.endSession(\"%s\", \"%s\")",
+                BuildConfig.aarrstat_api_url, BuildConfig.aarrstat_api_key);
+        mWebView.loadUrl(jsCommand);
     }
 }

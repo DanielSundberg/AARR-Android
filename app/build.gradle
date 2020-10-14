@@ -11,6 +11,7 @@ android {
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
 
         buildConfigField("String", "aarrstat_api_key", aarrstat_api_key)
+        buildConfigField("String", "aarrstat_api_url", aarrstat_api_url)
     }
     buildTypes {
         release {
