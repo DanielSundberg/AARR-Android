@@ -3,15 +3,18 @@ package com.danielsundberg.yarr;
 import android.content.Context;
 import android.content.Intent;
 import android.webkit.JavascriptInterface;
+import android.webkit.WebView;
 import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
 public class YARRWebAppInterface {
-    Context mContext;
+    private WebView mWebView;
+    private Context mContext;
 
     /** Instantiate the interface and set the context */
-    YARRWebAppInterface(Context c) {
+    YARRWebAppInterface(Context c, WebView webView) {
         mContext = c;
+        mWebView = webView;
     }
 
     /** Show a toast from the web page */
@@ -26,5 +29,9 @@ public class YARRWebAppInterface {
         share.putExtra(Intent.EXTRA_TEXT, url);
 
         mContext.startActivity(Intent.createChooser(share, "Share blog post!"));
+    }
+
+    public void StartSession() {
+        //mWebView.loadUrl("javascript:increment()");
     }
 }

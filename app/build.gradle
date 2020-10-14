@@ -9,6 +9,8 @@ android {
         versionCode 9
         versionName '2.0.0'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+
+        buildConfigField("String", "aarrstat_api_key", aarrstat_api_key)
     }
     buildTypes {
         release {

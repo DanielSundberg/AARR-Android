@@ -30,7 +30,10 @@ public class MainActivity extends Activity {
         webSettings.setDomStorageEnabled(true);
         webSettings.setAllowUniversalAccessFromFileURLs(true);
 
-        mWebView.addJavascriptInterface(new YARRWebAppInterface(this), "YARRAndroid");
+        mWebView.addJavascriptInterface(new YARRWebAppInterface(this, mWebView), "YARRAndroid");
+
+        String aarrstatApiKey = BuildConfig.aarrstat_api_key;
+
         mWebView.setWebViewClient(new YARRWebViewClient());
 
         mWebView.loadUrl("file:///android_asset/www/index.html");
@@ -44,6 +47,18 @@ public class MainActivity extends Activity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        System.out.println("onResume");
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        System.out.println("onPause");
+        super.onPause();
     }
 
     private class YARRWebViewClient extends WebViewClient {
