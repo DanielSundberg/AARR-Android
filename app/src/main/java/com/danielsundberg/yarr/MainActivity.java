@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Window;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -16,6 +17,7 @@ public class MainActivity extends Activity {
     private boolean mJSAppLoaded = false;
 
     @Override
+    @SuppressWarnings("deprecation")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -79,17 +81,15 @@ public class MainActivity extends Activity {
 
     private class YARRWebViewClient extends WebViewClient {
         @Override
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            //boolean hasGesture = request.hasGesture();
-            //String url = request.getUrl().toString();
-            if(!url.startsWith("http://") && !url.startsWith("https://")){
-                // For urls that start with file:// we do nothing
-                return true;
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            String url = request.getUrl().toString();
+            if (!url.startsWith("http://") && !url.startsWith("https://")){
+                // For urls that start with file:// or something other then http(s) we do nothing
             } else {
                 Intent intent = new Intent(Intent.ACTION_DEFAULT, Uri.parse(url));
                 startActivity(intent);
-                return true;
             }
+            return true;
         }
 
         @Override
