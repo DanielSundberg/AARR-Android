@@ -2,6 +2,7 @@ package com.danielsundberg.yarr;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Window;
@@ -38,6 +39,7 @@ public class MainActivity extends Activity {
         mWebView.addJavascriptInterface(mYarrWebAppInterface, "YARRAndroid");
 
         mWebView.setWebViewClient(new YARRWebViewClient());
+        mWebView.setBackgroundColor(Color.argb(0, 0, 0, 0));
 
         mWebView.loadUrl("file:///android_asset/www/index.html");
     }
