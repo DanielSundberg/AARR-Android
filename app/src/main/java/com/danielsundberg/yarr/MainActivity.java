@@ -58,26 +58,26 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onResume() {
-        System.out.println("onResume");
-        if (mJSAppLoaded) {
-            mYarrWebAppInterface.onResume();
-        }
+        //System.out.println("onResume");
+        //if (mJSAppLoaded) {
+        //    mYarrWebAppInterface.onResume();
+        //}
         super.onResume();
     }
 
     @Override
     protected void onPause() {
-        System.out.println("onPause");
-        if (mJSAppLoaded) {
-            mYarrWebAppInterface.onPause();
-        }
+        //System.out.println("onPause");
+        //if (mJSAppLoaded) {
+        //    mYarrWebAppInterface.onPause();
+        //}
         super.onPause();
     }
 
     @Override
     protected void onDestroy() {
-        System.out.println("onDestroy");
-        mJSAppLoaded = false;
+        //System.out.println("onDestroy");
+        //mJSAppLoaded = false;
         super.onDestroy();
     }
 
@@ -98,8 +98,8 @@ public class MainActivity extends Activity {
         public void onPageFinished(WebView webView, String url) {
             super.onPageFinished(webView, url);
             mJSAppLoaded = true;
-            mYarrWebAppInterface.initCallbacks();
-            mYarrWebAppInterface.onResume();
+            //mYarrWebAppInterface.initCallbacks();
+            //mYarrWebAppInterface.onResume();
         }
     }
 }
